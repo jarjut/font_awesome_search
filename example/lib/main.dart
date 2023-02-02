@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _loading = true;
     });
 
-    final icons = await searchIcons(query);
+    final icons = await searchFontAwesomeIcons(query);
     setState(() {
       _loading = false;
       _icons = icons;
@@ -69,36 +69,52 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                    hintText: 'Search for an icon',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: const InputDecoration(
+                      hintText: 'Search for an icon',
+                    ),
+                    onSubmitted: (_) => search(),
                   ),
                 ),
-              ),
-              IconButton(
-                onPressed: _loading ? null : search,
-                icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
-              ),
-            ],
-          ),
-          GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 100,
-              mainAxisExtent: 100,
-            ),
-            itemBuilder: (context, index) {
-              final icon = _icons[index];
-              return Center(
-                child: FaIcon(
-                  icon,
-                  size: 50,
+                IconButton(
+                  onPressed: _loading ? null : search,
+                  icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
                 ),
-              );
-            },
+              ],
+            ),
+          ),
+          Expanded(
+            child: _loading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : _icons.isEmpty
+                    ? const Center(
+                        child: Text('No icons'),
+                      )
+                    : GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 100,
+                          mainAxisExtent: 100,
+                        ),
+                        itemCount: _icons.length,
+                        itemBuilder: (context, index) {
+                          final icon = _icons[index];
+                          return Center(
+                            child: FaIcon(
+                              icon,
+                              size: 50,
+                            ),
+                          );
+                        },
+                      ),
           ),
         ],
       ),

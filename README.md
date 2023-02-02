@@ -11,29 +11,43 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Font Awesome Search
 
-## Features
+[![Pub](https://img.shields.io/pub/v/font_awesome_search.svg)](https://pub.dev/packages/font_awesome_search)
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Provide a search function for [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter) package using the same Algolia search engine that powers the FontAwesome Icon Gallery
 
-## Getting started
+This function call graphql API from https://api.fontawesome.com. For more information about the API, please visit
+https://fontawesome.com/docs/apis/graphql/query-fields
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+!! This package doesn't support custom icons yet, you can only search for free icons !!
+
+## Installation
+```yaml
+dependencies:
+  font_awesome_flutter: 
+  font_awesome_search: 
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:font_awesome_search/font_awesome_search.dart';
+
+final icons = await searchFontAwesomeIcons('query');
 ```
 
-## Additional information
+## Important Notice
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+To make this package work you need to disables icon tree shaking. This means unused
+icons will not be automatically removed and thus make the overall app size
+larger. You may need to pass --no-tree-shake-icons to the flutter build command for it
+to complete successfully.
+
+Example:
+
+```
+flutter build apk --no-tree-shake-icons
+```
+
+

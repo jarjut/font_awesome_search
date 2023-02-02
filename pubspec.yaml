@@ -1,7 +1,7 @@
 name: font_awesome_search
 description: Provide Search Icon with FontAwesomeApi.
 version: 1.0.0
-# repository: ""
+repository: "https://github.com/jarjut/font_awesome_search"
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

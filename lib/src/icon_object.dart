@@ -1,3 +1,4 @@
+/// IconObject Model from search result
 class IconObject {
   final String id;
   final String label;
@@ -24,6 +25,7 @@ class IconObject {
       'IconObject(id: $id, label: $label, familyStyle: $familyStyle)';
 }
 
+/// IconFamilyStyle Model
 class IconFamilyStyle {
   final String family;
   final String style;
